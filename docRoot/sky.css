@@ -1,0 +1,79 @@
+/*Smart-phone style*/
+
+/*style by default category*/
+body {margin: 15px 20px 20px 20px;
+        font-family: 'Ek Mukta', sans-serif;
+        font-size: 80%;
+}
+p {
+    margin: 0;
+}
+form {
+    display: block;
+    text-align: center;
+    background: #F5F5F5;
+}
+th, td {
+    padding: 5px; 
+    text-align: left;
+    vertical-align: middle;
+}
+th {
+    background-color: #7BAEE8;
+}
+table {
+    width: 100%;
+}
+li {
+    margin-top: 5px;
+}
+
+/*style by class*/
+.imageContainer {
+    text-align: center;
+}
+.textEvent {
+    text-align: left;
+    width: 85%;
+}
+.textDate {
+    text-align: right;
+    width: 20%;
+}
+.resumePhoto {
+    width: 150px;
+}
+.bulletImage {
+    width: 20px;
+}
+.listItems {
+    display: block;
+    margin-left: 25px;
+}
+.listItems::before {
+    content: url('/Material/leaf.jpg');
+}
+.textJustify {
+    text-align: justify;
+}
+.emphasis {
+    font-weight: bold;
+    color: blue;
+}
+.center {
+    text-align: center;
+}
+
+
+
+/*Computer screen style*/
+@media screen and (min-width: 650px) {
+    body {
+        margin: 30px 140px 20px 120px;
+        font-size: 100%;
+    }
+    .imageContainer {
+        float: right;
+    }
+    th {font-size: 13pt;}
+}

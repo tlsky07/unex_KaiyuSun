@@ -2,21 +2,10 @@
 <html>
     <head>
         <title> Kaiyu's resume </title>
+        <link rel="stylesheet" type="text/css" href="sky.css">
         <link rel="icon" href="/Material/Icon.jpg">
         <link rel="shotcuticon" href="/Material/Icon.jpg">
-        <style>
-        th, td {padding: 5px; 
-                text-align: left;}
-        html {display: table;
-              margin: auto;}
-        body {display: table-cell;
-              vertical-align: middle;}
-        tr, ul, ol {margin: 0;}
-        form {margin: 0 0 0 350px;
-              padding: 0 0 0 0px;
-              width: 220px;
-              background: #F5F5F5;}
-        </style>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ek+Mukta">
         <script type="text/javascript"
                 src="/scripts/myscript.js"></script>
         <meta charset="UTF-8">
@@ -28,163 +17,164 @@
     </head>
     <body>
         <!--Kaiyu Sun's resume-->
+        <!--top heading-->
+        <div>
+            <p class="imageContainer"> <img src="/Material/SKY.jpg" class="resumePhoto"> </p>
+            <h1> Kaiyu Sun </h1>
+            <p> 
+            1546 Brunswig Lane, Emeryville, CA 94608 <br>
+            cel: 510-701-7507 <br>
+            email: tlsky07@gmail.com 
+            </p>
+        </div>
         <br>
-        <table id="top" width="900" wrap="hard">
+        <!--Working experience-->
+        <table>
             <tr>
-                <th style="font-size: 23pt;" width="400"> Kaiyu Sun </th>
-                <th><img src="/Material/SKY.jpg" height="120in" width="115in"></th>
-                <th style="text-align:right;"> 1546 Brunswig Lane #59, <br> Emeryville, CA, 94608 <br> 510-701-7507 <br> tlsky07@gmail.com </th>
-            </tr>
-        </table>
-        <div class="aligncenter" style="width: 900px; height: 0; border-top: 2px double #000000;font-size:0;">-</div>
-        <br>
-        <table width="900" wrap="hard">
-            <tr>
-                <th style="font-size: 13pt;" colspan="2"> WORKING EXPERIENCE </th>
+                <th colspan="2"> WORKING EXPERIENCE </th>
             </tr>
             <tr>
-                <td> Scientific Engineering Associate, Lawrence Berkeley National Laboratory(LBNL), Berkeley, CA </td>
-                <td style="text-align:right;"> 07/2014-Present </td>
+                <td class="textEvent"> Scientific Engineering Associate, Lawrence Berkeley National Laboratory(LBNL), Berkeley, CA </td>
+                <td class="textDate"> 07/2014-Present </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: justify;">
-                    <ul>
-                        <li style="margin-top: 5px;"> Work effectively with the team on multi-disciplinary R&D projects </li>
-                        <li style="margin-top: 5px;"> Performed as project manager, took main responsibility in energy simulation and model validation in Daikin Phase II (2014) and Phase III (2015) projects </li>
-                        <li style="margin-top: 5px;"> Led the project: Quantifying the benefits of integrated system retrofit approach over traditional retrofit approaches, and performed energy simulation and economic analysis </li>
-                        <li style="margin-top: 5px;"> Developed a new methodology for automatic model calibration, and implemented in the Commercial Building Energy Saver Toolkit using Ruby. Co-author of two software disclosures: CBES API (2015-069) and CBES App (2015-071) </li>
-                        <li style="margin-top: 5px;"> Performed energy simulation to investigate the potential building energy savings from occupant behavior measures </li>
-                        <li style="margin-top: 5px;"> Programmed to transfer DOE reference models to OpenStudio models based on ASHRAE 90.1 standards </li>
-                        <li style="margin-top: 5px;"> Wrote technical reports and proposals </li>
-                        <li style="margin-top: 5px;"> Provided trainings of EnergyPlus and DesignBuilder to colleagues and clients </li>
-                    </ul>
+                <td colspan="2" class="textJustify">
+                    <p class="listItems"> Work effectively with the team on multi-disciplinary R&D projects</p>
+                    <p class="listItems"> Performed as project manager, took main responsibility in energy simulation and model validation in Daikin Phase II (2014) and Phase III (2015) projects</p>
+                    <p class="listItems"> Led the project: Quantifying the benefits of integrated system retrofit approach over traditional retrofit approaches, and performed energy simulation and economic analysis </p>
+                    <p class="listItems"> Developed a new methodology for automatic model calibration, and implemented in the Commercial Building Energy Saver Toolkit using Ruby. Co-author of two software disclosures: CBES API (2015-069) and CBES App (2015-071) </p>
+                    <p class="listItems"> Performed energy simulation to investigate the potential building energy savings from occupant behavior measures </p>
+                    <p class="listItems"> Programmed to transfer DOE reference models to OpenStudio models based on ASHRAE 90.1 standards </p>
+                    <p class="listItems"> Wrote technical reports and proposals </p>
+                    <p class="listItems"> Provided trainings of EnergyPlus and DesignBuilder to colleagues and clients </p>                    
                 </td>
             </tr>
         </table>
         <br>
-        <table width="900" wrap="hard">
+        <!--EDUCATION-->
+        <table>
             <tr>
-                <th style="font-size: 13pt;" colspan="2"> EDUCATION </th>
+                <th colspan="2"> EDUCATION </th>
             </tr>
             <tr>
-                <td width="700"><ul><li> M.S. in Civil Engineering, Dept. of Building Science, School of Architecture, Tsinghua University </li></ul></td>
-                <td style="text-align:right;"> 08/2011-07/2014 </td>
+                <td class="textEvent listItems"> M.S. in Civil Engineering, Dept. of Building Science, School of Architecture, Tsinghua University </td>
+                <td class="textDate"> 08/2011-07/2014 </td>
             </tr>
             <tr>
-                <td width="700"><ul><li> B.S. in Building Environment and Equipment Engineering, Dept. of Building Science, School of Architecture, Tsinghua University </li></ul></td>
-                <td style="text-align:right;"> 08/2007-07/2011 </td>
+                <td class="textEvent listItems"> B.S. in Building Environment and Equipment Engineering, Dept. of Building Science, School of Architecture, Tsinghua University </td>
+                <td class="textDate"> 08/2007-07/2011 </td>
             </tr>
             <tr>
-                <td width="700"><ul><li> Bachelor of Arts in Design, Academy of Arts & Design, Tsinghua University </li></ul></td>
-                <td style="text-align:right;"> 09/2008-07/2011 </td>
-            </tr>
-        </table>
-        <br>
-        <table width="900" wrap="hard">
-            <tr>
-                <th style="font-size: 13pt;" colspan="2"> PROJECTS AND RESEARCH EXPERIENCE </th>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Quantifying the Benefits of Integrated System Retrofit Approach over Traditional Retrofit Approaches </li></ul></td>
-                <td style="text-align:right;"> 02/2015-08/2015 </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Daikin Phase III: Development and validation of a New Model for the Heat Recovery Type VRV (VRV-HR) Systems in EnergyPlus </li></ul></td>
-                <td style="text-align:right;"> 04/2015-Present </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Daikin Phase II: Development and Validation of a New Model for the Heat Pump Type VRV (VRV-HP) Systems in EnergyPlus </li></ul></td>
-                <td style="text-align:right;"> 07/2014-04/2015 </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Case Study on the Potential Energy Savings of Occupant Behavior Energy Conservation Measures </li></ul></td>
-                <td style="text-align:right;"> 07/2015-Present </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Commercial Building Energy Saver Toolkit (CBES) – Automatic Model Calibration </li></ul></td>
-                <td style="text-align:right;"> 07/2014-01/2015 </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> Modeling Based Comparison and Analysis of Energy Consumption of Office Buildings in China and Other Countries </li></ul></td>
-                <td style="text-align:right;"> 10/2013-02/2014 </td>
-            </tr>
-            <tr>
-                <td width="700"><ul><li> The Development of OpenStudio Reference Models </li></ul></td>
-                <td style="text-align:right;"> 07/2015-Present </td>
+                <td class="textEvent listItems"> Bachelor of Arts in Design, Academy of Arts & Design, Tsinghua University </td>
+                <td class="textDate"> 09/2008-07/2011 </td>
             </tr>
         </table>
         <br>
-        <table width="900" wrap="hard">
+        <!--PROJECTS AND RESEARCH EXPERIENCE-->
+        <table>
             <tr>
-                <th style="font-size: 13pt;" colspan="2"> PUBLICATIONS </th>
+                <th colspan="2"> PROJECTS AND RESEARCH EXPERIENCE </th>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Quantifying the Benefits of Integrated System Retrofit Approach over Traditional Retrofit Approaches </td>
+                <td class="textDate"> 02/2015-08/2015 </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Daikin Phase III: Development and validation of a New Model for the Heat Recovery Type VRV (VRV-HR) Systems in EnergyPlus </td>
+                <td class="textDate"> 04/2015-Present </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Daikin Phase II: Development and Validation of a New Model for the Heat Pump Type VRV (VRV-HP) Systems in EnergyPlus </td>
+                <td class="textDate"> 07/2014-04/2015 </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Case Study on the Potential Energy Savings of Occupant Behavior Energy Conservation Measures </td>
+                <td class="textDate"> 07/2015-Present </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Commercial Building Energy Saver Toolkit (CBES) – Automatic Model Calibration </td>
+                <td class="textDate"> 07/2014-01/2015 </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> Modeling Based Comparison and Analysis of Energy Consumption of Office Buildings in China and Other Countries </td>
+                <td class="textDate"> 10/2013-02/2014 </td>
+            </tr>
+            <tr>
+                <td class="textEvent listItems"> The Development of OpenStudio Reference Models </td>
+                <td class="textDate"> 07/2015-Present </td>
+            </tr>
+        </table>
+        <br>
+        <!--PUBLICATIONS-->
+        <table>
+            <tr>
+                <th colspan="2"> PUBLICATIONS </th>
             </tr>
             <tr>
                 <td colspan="2"> 7 journal papers (3 first author), 2 conference papers. </td>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: justify;">
+                <td colspan="2" class="textJustify">
                     <ol>
-                        <li style="margin-top: 5px;"> <span><b>Kaiyu Sun</b></span>, Tianzhen Hong. A Simulation Approach to Estimate Energy Savings Potential of Occupant Behavior Measures. Energy and Buildings 136, 43–62 </li>
-                        <li style="margin-top: 5px;"> <span><b>Kaiyu Sun</b></span>, Tianzhen Hong, Sarah C. Taylor-Lange, Mary Ann Piette. A Pattern-based Automated Approach to Building Energy Model Calibration. Applied Energy 165 (2016) 214–224. </li>
-                        <li style="margin-top: 5px;"> <span><b>Kaiyu Sun</b></span>, Da Yan, Tianzhen Hong, Siyue Guo. Stochastic Modeling of Overtime Occupancy and Its Application in Building Energy Simulation and Calibration. Building and Environment 79 (2014) 1-12. </li>
-                        <li style="margin-top: 5px;"> Tianzhen Hong, <span><b>Kaiyu Sun</b></span>, Rongpeng Zhang, Ryohei Hinokuma, Shinichi Kasahara, Yoshinori Yura. Development and Validation of a New Variable Refrigerant Flow System Model in EnergyPlus. Energy and Buildings (2015). </li>
-                        <li style="margin-top: 5px;"> Xinqiao Yu, Da Yan, <span><b>Kaiyu Sun</b></span>, Tianzhen Hong, Dandan Zhu. Comparative study of the cooling energy performance of variable refrigerant flow systems and variable air volume systems in office buildings. Applied Energy 183, 725-736. </li>
-                        <li style="margin-top: 5px;"> Qi Zhang, Da Yan, Jingjing An, Tianzhen Hong, Wei Tian, <span><b>Kaiyu Sun</b></span>. Spatial distribution of internal heat gains: A probabilistic representation and evaluation of its influence on cooling equipment sizing in large office buildings. Energy and Buildings 139, 407-416. </li>
-                        <li style="margin-top: 5px;"> Tianzhen Hong, Mary Ann Piette, Yixing Chen, Sang Hoon Lee, Sarah C. Taylor-Lange, Rongpeng Zhang, <span><b>Kaiyu Sun</b></span>, Phillip Price. Commercial Building Energy Saver: An Energy Retrofit Analysis Toolkit. Applied Energy 159 (2015) 298-309. </li>
-                        <li style="margin-top: 5px;"> Tianzhen Hong, <span><b>Kaiyu Sun</b></span>, Rongpeng Zhang, Oren Schetrit, Ryohei Hinokuma, Shinichi Kasahara, Yoshinori Yura. Development and Validation of A New VRF Model in EnergyPlus. ASHRAE Winter Conference Orlando, 2016. </li>
-                        <li style="margin-top: 5px;"> Tianzhen Hong, Yixing Chen, Mary Ann Piette, Sang Hoon Lee, Rongpeng Zhang, <span><b>Kaiyu Sun</b></span>, et al. Commercial Building Energy Saver: An Energy Retrofit Analysis Toolkit. ISHVAC-COBEE, Tianjin, China, 07/2015. </li>
+                        <li> <span class="emphasis">Kaiyu Sun</span>, Tianzhen Hong. A Simulation Approach to Estimate Energy Savings Potential of Occupant Behavior Measures. Energy and Buildings 136, 43–62 </li>
+                        <li> <span class="emphasis">Kaiyu Sun</span>, Tianzhen Hong, Sarah C. Taylor-Lange, Mary Ann Piette. A Pattern-based Automated Approach to Building Energy Model Calibration. Applied Energy 165 (2016) 214–224. </li>
+                        <li> <span class="emphasis">Kaiyu Sun</span>, Da Yan, Tianzhen Hong, Siyue Guo. Stochastic Modeling of Overtime Occupancy and Its Application in Building Energy Simulation and Calibration. Building and Environment 79 (2014) 1-12. </li>
+                        <li> Tianzhen Hong, <span class="emphasis">Kaiyu Sun</span>, Rongpeng Zhang, Ryohei Hinokuma, Shinichi Kasahara, Yoshinori Yura. Development and Validation of a New Variable Refrigerant Flow System Model in EnergyPlus. Energy and Buildings (2015). </li>
+                        <li> Xinqiao Yu, Da Yan, <span class="emphasis">Kaiyu Sun</span>, Tianzhen Hong, Dandan Zhu. Comparative study of the cooling energy performance of variable refrigerant flow systems and variable air volume systems in office buildings. Applied Energy 183, 725-736. </li>
+                        <li> Qi Zhang, Da Yan, Jingjing An, Tianzhen Hong, Wei Tian, <span class="emphasis">Kaiyu Sun</span>. Spatial distribution of internal heat gains: A probabilistic representation and evaluation of its influence on cooling equipment sizing in large office buildings. Energy and Buildings 139, 407-416. </li>
+                        <li> Tianzhen Hong, Mary Ann Piette, Yixing Chen, Sang Hoon Lee, Sarah C. Taylor-Lange, Rongpeng Zhang, <span class="emphasis">Kaiyu Sun</span>, Phillip Price. Commercial Building Energy Saver: An Energy Retrofit Analysis Toolkit. Applied Energy 159 (2015) 298-309. </li>
+                        <li> Tianzhen Hong, <span class="emphasis">Kaiyu Sun</span>, Rongpeng Zhang, Oren Schetrit, Ryohei Hinokuma, Shinichi Kasahara, Yoshinori Yura. Development and Validation of A New VRF Model in EnergyPlus. ASHRAE Winter Conference Orlando, 2016. </li>
+                        <li> Tianzhen Hong, Yixing Chen, Mary Ann Piette, Sang Hoon Lee, Rongpeng Zhang, <span class="emphasis">Kaiyu Sun</span>, et al. Commercial Building Energy Saver: An Energy Retrofit Analysis Toolkit. ISHVAC-COBEE, Tianjin, China, 07/2015. </li>
                     </ol>                    
                 </td>
             </tr>
         </table>
         <br>
-        <table width="900" wrap="hard">
+        <!--PEER REVIEWER FOR ACADEMIC JOURNALS-->
+        <table>
             <tr>
-                <th style="font-size: 13pt;" colspan="2"> PEER REVIEWER FOR ACADEMIC JOURNALS </th>
+                <th colspan="2"> PEER REVIEWER FOR ACADEMIC JOURNALS </th>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: justify;">
-                    <ul>
-                        <li style="margin-top: 5px;"> Applied Energy </li>
-                        <li style="margin-top: 5px;"> Energy and Buildings </li>
-                    </ul>
+                <td colspan="2" class="textJustify">
+                    <p class="listItems"> Applied Energy </p>
+                    <p class="listItems"> Energy and Buildings </p>
                 </td>
             </tr>
         </table>
         <br>
-        <table width="900" wrap="hard">
+        <!--SOFTWARE DISCLOSURES-->
+        <table>
             <tr>
-                <th style="font-size: 13pt;" colspan="2"> SOFTWARE DISCLOSURES </th>
+                <th colspan="2"> SOFTWARE DISCLOSURES </th>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: justify;">
-                    <ul>
-                        <li style="margin-top: 5px;"> Commercial Building Energy Saver (CBES) API (2015-069). @LBNL </li>
-                        <li style="margin-top: 5px;"> Commercial Building Energy Saver (CBES) App (2015-071). @LBNL </li>
-                    </ul>
+                <td colspan="2" class="textJustify">
+                    <p class="listItems"> Commercial Building Energy Saver (CBES) API (2015-069). @LBNL </p>
+                    <p class="listItems"> Commercial Building Energy Saver (CBES) App (2015-071). @LBNL </p>
                 </td>
             </tr>
         </table>
         <br>
-        <table width="900" wrap="hard">
+        <!--HONORS-->
+        <table>
             <tr>
-                <th style="font-size: 13pt;" colspan="2"> HONORS </th>
+                <th colspan="2"> HONORS </th>
             </tr>
             <tr>
-                <td colspan="2" style="text-align: justify;">
-                    <ul>
-                        <li style="margin-top: 5px;"> 2010 &nbsp&nbsp&nbsp&nbsp NiTianzeng scholarship, Tsinghua University </li>
-                        <li style="margin-top: 5px;"> 2009 &nbsp&nbsp&nbsp&nbsp NanBo scholarship, Tsinghua University </li>
-                        <li style="margin-top: 5px;"> 2008 &nbsp&nbsp&nbsp&nbsp Excellent class scholarship, Tsinghua University </li>
-                    </ul>
+                <td colspan="2" class="textJustify">
+                    <p class="listItems"> 2010 &nbsp&nbsp&nbsp&nbsp NiTianzeng scholarship, Tsinghua University </p>
+                    <p class="listItems"> 2009 &nbsp&nbsp&nbsp&nbsp NanBo scholarship, Tsinghua University </p>
+                    <p class="listItems"> 2008 &nbsp&nbsp&nbsp&nbsp Excellent class scholarship, Tsinghua University </p>                    
                 </td>
             </tr>
         </table>
         <br>
 
         <!--Contact me form-->
-        <div class="aligncenter" style="width:900px;height:0;border-top:4px outset #008000;font-size:0;">-</div>
-        <h2 style="text-align: center;"> Contact Me </h2>
+        <!--division line-->
+        <div class="aligncenter" style="width: 100%; height:0; border-top:4px outset #008000; font-size:0;">-</div>
+        <h2 class="center"> Contact Me </h2>
         <form action="http://holub.com/echo.php" method="post">
             Name: &nbsp&nbsp<input type="text" name="name"><br>
             Email: &nbsp&nbsp<input type="text" name="email"><br>
