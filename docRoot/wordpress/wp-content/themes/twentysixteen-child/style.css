@@ -1,0 +1,29 @@
+/*
+Theme Name: Twenty Sixteen Child
+Description: Twenty Sixteen Child Theme
+Author: Kaiyu Sun
+Template: twentysixteen
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: light, dark, two-columns, right-sidebar, responsive-layout, accessibility-ready
+Text Domain: twenty-sixteen-child
+*/
+
+.footer-widget {
+    margin: 2% 0;
+}
+
+.main-content-widget {
+    margin: 2% 0;
+}
+.no-results {
+    display: none;
+}
+
+.header-image {
+    /*display: none;*/
+}
+.header-image .blog {
+    display: none;
+}
