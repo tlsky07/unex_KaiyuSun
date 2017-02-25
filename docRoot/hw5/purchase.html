@@ -1,0 +1,159 @@
+<script>
+var order = {
+    "lineItems" :[
+        {
+            'Name' : "mocha",
+            'Price' : 5,
+            'Qty' : 1
+        },
+        {
+            'Name' : "hazelnut latte", 
+            'Price' : 8,
+            'Qty' : 2
+        },
+        {
+            'Name' : "cookie",
+            'Price' : 4,
+            'Qty' : 3
+        },
+        {
+            'Name' : "hamburger",
+            'Price' : 10,
+            'Qty' : 1
+        }
+    ],
+    "customerInfo" : {
+        'Name'            : "Kaiyu Sun",
+        'Address'         : "1234 Berkeley Way, Berkeley",
+        'cardNumber'      : 1234567890,
+        'expirationDate'  : "03/10/2019"
+
+    }    
+}
+console.log (order.customerInfo.expirationDate)
+
+// generate div for each item component
+function div_concatenate ( str ) {
+    str = '<div class="itemStyle">' + str + '</div>';
+    return str;
+}
+
+// generate div for each item
+function div_concatenate_perline ( str, idName ) {
+    str = '<div id="' + idName + '" class="itemLineStyle">' + str + '</div>';
+    return str
+}
+
+// copy the original line items to a new array
+var objList = order.lineItems.slice(0);
+
+function display (objList) {
+    var codeItems = "";
+    codeItems += div_concatenate( "<b>Name</b>" );
+    codeItems += div_concatenate( "<b>Price($)</b>" );
+    codeItems += div_concatenate( "<b>Quantity</b>" );
+    codeItems = div_concatenate_perline(codeItems, "caption");
+    console.log (codeItems);
+    for(var i=0; i<objList.length; i++) {
+        var name = objList[i].Name;
+        var price = objList[i].Price;
+        var qty = objList[i].Qty;
+        var temp = "";
+        temp += div_concatenate( name );
+        temp += div_concatenate( price );
+        temp += div_concatenate( qty );
+        temp = temp + '<button type="button" onclick="delete_item(' + String(i+1) + ')">Delete</button>';
+        codeItems += div_concatenate_perline( temp, "item"+String(i+1) );
+    }
+    document.getElementById("item").innerHTML = codeItems;
+}
+
+function delete_item ( itemID ) {
+    objList.splice((itemID-1),1);
+    display (objList);
+    cal_subtotal (objList);
+    location.reload;
+}
+
+// calculate the subtotal
+function cal_subtotal (objList) {
+    var totalNotax = 0;
+    var tax = 0;
+    var shipping = 5;
+    for (i=0;i<objList.length;i++) {
+        totalNotax += objList[i].Price * objList[i].Qty;
+    }
+    tax = totalNotax * 0.1;
+    if (totalNotax == 0) {
+        shipping = 0;
+    }
+    document.getElementById("tax").innerHTML = tax;
+    document.getElementById("shipping").innerHTML = shipping;
+    document.getElementById("subTotal").innerHTML = totalNotax + tax + shipping;
+    location.reload;    
+}
+
+function fill_info () {
+    objCustomerInfo = order.customerInfo;
+    document.getElementById("customername").value = objCustomerInfo.Name;
+    document.getElementById("address").value = objCustomerInfo.Address;
+    document.getElementById("cardnum").value = objCustomerInfo.cardNumber;
+    console.log (objCustomerInfo.expirationDate);
+    date = Date.parse(objCustomerInfo.expirationDate);
+    console.log (date);
+    document.getElementById("epdate").value = date;
+    // .toString('MM/dd/yyyy')
+    location.reload;
+}
+
+function reset_lineItem () {
+    objList = order.lineItems.slice(0);
+    display (objList);
+    cal_subtotal(objList);
+    location.reload;
+}
+
+function reset_customerInfo () {
+    document.getElementById("customerInfoForm").reset();
+    location.reload;
+}
+
+window.onload = function () {
+    display (objList);
+    cal_subtotal(objList);
+    document.getElementById("customerInfoForm").reset();
+}
+
+</script>
+
+<html>
+    <head>
+        <title> Shopping cart Page </title>
+        <link rel="stylesheet" type="text/css" href="purchase.css">
+        <script type="text/javascript" src="date.js"></script>
+    </head>
+    <body>
+        <div id="cart" class="lineItems">
+            <h2>Shopping Cart</h2>
+            <div id="item" class="item">item</div>
+            <div class="tax">Tax (10%): <span id="tax">temp value</span></div>
+            <div class="shipping">Shipping: <span id="shipping">temp value</span></div>
+            <div class="subTotal">Subtotal: <span id="subTotal">temp value</span></div>
+            <div class="reset_lineItem"><button type="button" onclick="reset_lineItem()">Reset</button></div>
+        </div>
+        <br>
+        <button type="button" onclick="fill_info()">Fill in Bill information</button>
+        <button type="button" onclick="reset_customerInfo()">Reset</button><br>
+        <br>
+        <div>
+            <form id="customerInfoForm" action="http://holub.com/echo.php" method="post">
+                Name: &nbsp&nbsp             <input id="customername" type="text" name="customername" size="25"><br>
+                Address: &nbsp&nbsp          <input id="address" type="text" name="address" size="45"><br>
+                CreditCardNumber: &nbsp&nbsp <input id="cardnum" type="number" name="cardnum" size="35"><br>
+                expirationDate: &nbsp&nbsp   <input id="epdate" type="date" name="epdate" size="20"><br>
+                <br>
+                <input class="checkoutButton" type="submit"; value="Check out";>
+            </form>
+        </div>
+    </body>
+</html>

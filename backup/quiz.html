@@ -1,0 +1,20 @@
+<script>
+var displayText = "This is cool!";
+var strings =["this--","is--","a--","test!"];
+var concatenation = "";
+for (var i = 0; i < strings.length; i++) {
+    concatenation += strings[i];
+}
+
+
+function display() {
+    document.getElementById("test").innerHTML = concatenation;
+}
+
+</script>
+
+
+<html>
+    <button type="button" onclick="display()">display</button>
+    <p id="test">original text</p>
+</html>
