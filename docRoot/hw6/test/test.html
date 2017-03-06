@@ -1,0 +1,35 @@
+<script>
+
+// 1st method of diable
+var Order = {
+    "customer": "aa",
+    "description": "ddd",
+    "amount": 0.0,
+    "amDisabled": false,
+    "disable": function(){ this.amDisabled = true}
+}
+
+Order myOrder = AllOrders[0];
+myOrder.disable();
+
+// 2nd method of diable
+
+// "Constructor"
+function Order( customerVal, descriptionVal, amountVal) {
+    // this is trying to construct an object
+    this.customer = customerVal;
+    this.description = descriptionVal;
+    this.amount = amountVal;
+    this.disable = function() { this.amount = -1; }  // can also assign funtion to a field
+}
+
+// if a field doesn't exist, it can be automatically created by assign a value to it
+// e.g. Order.customer = "Allen"
+
+var myOrder = new Order( "Allen", "my cool thing", 10.0);
+var myOrder2 = new Order( "Fred", "my cool thing", 10.0);
+// new is to allocate a chunk of memory for some stuff!!!!!!!!!!!!!!!!!!
+myOrder.diable();
+
+
+</script>

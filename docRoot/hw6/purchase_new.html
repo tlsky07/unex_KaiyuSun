@@ -1,0 +1,184 @@
+<script>
+'use strict';
+
+function get(url) {
+    return new Promise( function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            resolve(req.response);
+        }
+        req.onerror = function() {
+            reject( Error("What went wrong") );  // this is just a substitute of what will really be returned
+        }
+        req.open ("POST", url);
+        req.send();
+    })
+}
+
+var myOrder;
+
+function getmyorder() {
+    get("order.json").then(
+        function(response) {
+            var orderInfo = JSON.parse(response);
+            myOrder = new Order(orderInfo.customer, orderInfo.lineItems);
+            myOrder.cal_subtotal();
+            myOrder.display();
+            document.getElementById("page").style = "display:none;";
+            document.getElementById("cartpage").style = null;
+        },
+        function(error) { console.log("Failed" + error.message); }
+    )
+    .catch(
+        function(reason) {
+            console.log('Handle rejected promise ('+reason+') here.');
+        });
+}
+
+function Order( customerval,lineItemval ) {
+    this.customer = new Customer(customerval.name, customerval.address, customerval.cardNumber, customerval.expirationDate);
+    this.lineItems = [];
+        for (var i=0; i<lineItemval.length; i++) {
+            this.lineItems.push(new lineItem(lineItemval[i].name, lineItemval[i].itemID, lineItemval[i].price, lineItemval[i].qty));
+        }
+    this.cal_subtotal = function() {
+        var totalNotax = 0;
+        var tax = 0;
+        var shipping = 5;
+        for (i=0; i<this.lineItems.length; i++) {
+            if (this.lineItems[i].isDeleted) { continue; }
+            else { totalNotax += this.lineItems[i].price * this.lineItems[i].qty; }
+        }
+        tax = totalNotax * 0.1;
+        if (totalNotax == 0) {
+            shipping = 0;
+        }
+        document.getElementById("tax").innerHTML = tax;
+        document.getElementById("shipping").innerHTML = shipping;
+        document.getElementById("subTotal").innerHTML = totalNotax + tax + shipping;
+    }
+    this.display = function() {
+        var htmlcode = "";
+        htmlcode += div_concatenate( "<b>Name</b>" );
+        htmlcode += div_concatenate( "<b>Price($)</b>" );
+        htmlcode += div_concatenate( "<b>Quantity</b>" );
+        htmlcode = div_concatenate_perline(htmlcode, "caption");
+        for (i=0; i<this.lineItems.length; i++) {
+            if (this.lineItems[i].isDeleted) { continue; }
+            else { htmlcode += this.lineItems[i].html_code(); }
+        };
+        console.log (htmlcode);        
+        document.getElementById("item").innerHTML = htmlcode;
+    }
+}
+
+function Customer( nameval, addressval, cardNumberval, expirationDateval ) {
+    this.name = nameval;
+    this.address = addressval;
+    this.cardNumber = cardNumberval;
+    this.expirationDate = expirationDateval;
+}
+
+function lineItem( nameval, itemIDval, priceval, qtyval ) {
+    this.name = nameval;
+    this.itemID = itemIDval;
+    this.price = priceval;
+    this.qty = qtyval;
+    // this is functioning as myLineItem.insertRepresentationIntoDivWithID
+    this.html_code = function() {
+        var temp = "";
+        temp += div_concatenate( this.name );
+        temp += div_concatenate( this.price );
+        temp += div_concatenate( this.qty );
+        temp = temp + '<button type="button" onclick="delete_item(' + this.itemID + ')">Delete</button>';
+        temp = div_concatenate_perline( temp, this.itemID );
+        return temp;
+    }
+    this.isDeleted = false;  // default value
+    this.delete_this_item = function() { this.isDeleted = true; }
+}
+
+function delete_item(itemDivID) {
+    for (var i=0; i<myOrder.lineItems.length; i++) {
+        if (myOrder.lineItems[i].itemID == itemDivID.id) {
+            myOrder.lineItems[i].delete_this_item(); 
+        } else { continue; }
+    }
+    myOrder.cal_subtotal();
+    myOrder.display();   
+}
+
+// generate div for each item component
+function div_concatenate ( str ) {
+    str = '<div class="itemStyle">' + str + '</div>';
+    return str;
+}
+
+// generate div for each item
+function div_concatenate_perline ( str, idName ) {
+    str = '<div id="' + idName + '" class="itemLineStyle">' + str + '</div>';
+    return str
+}
+
+function fill_info () {
+    var customerInfo = myOrder.customer;
+    document.getElementById("customername").value = customerInfo.name;
+    document.getElementById("address").value = customerInfo.address;
+    document.getElementById("cardnum").value = customerInfo.cardNumber;
+    console.log (customerInfo.expirationDate);
+    var date = Date.parse(customerInfo.expirationDate);
+    console.log (date);
+    document.getElementById("epdate").value = date;
+}
+
+function reset_lineItem () {
+    myOrder = getmyorder();
+}
+
+function reset_customerInfo () {
+    document.getElementById("customerInfoForm").reset();
+}
+
+</script>
+
+
+
+
+
+
+<html>
+    <head>
+        <title> Shopping cart Page </title>
+        <link rel="stylesheet" type="text/css" href="purchase.css">
+        <script type="text/javascript" src="date.js"></script>
+    </head>
+    <body>
+        <div id="page">
+            <button type="button" onclick="getmyorder()"><h2>Go to my cart</h2></button>
+        </div>
+        <div id="cartpage" style="display:none;"> 
+            <div id="cart" class="lineItems">
+                <h2>Shopping Cart</h2>
+                <div id="item" class="item">item</div>
+                <div class="tax">Tax (10%): <span id="tax">temp value</span></div>
+                <div class="shipping">Shipping: <span id="shipping">temp value</span></div>
+                <div class="subTotal">Subtotal: <span id="subTotal">temp value</span></div>
+                <div class="reset_lineItem"><button type="button" onclick="reset_lineItem()">Reset</button></div>
+            </div>
+            <br>
+            <button type="button" onclick="fill_info()">Fill in Bill information</button>
+            <button type="button" onclick="reset_customerInfo()">Reset</button><br>
+            <br>
+            <div>
+                <form id="customerInfoForm" action="http://holub.com/echo.php" method="post">
+                    Name: &nbsp&nbsp             <input id="customername" type="text" name="customername" size="25"><br>
+                    Address: &nbsp&nbsp          <input id="address" type="text" name="address" size="45"><br>
+                    CreditCardNumber: &nbsp&nbsp <input id="cardnum" type="number" name="cardnum" size="35"><br>
+                    expirationDate: &nbsp&nbsp   <input id="epdate" type="date" name="epdate" size="20"><br>
+                    <br>
+                    <input class="checkoutButton" type="submit"; value="Check out";>
+                </form>
+            </div>
+        </div>
+    </body> 
+</html>

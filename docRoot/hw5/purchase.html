@@ -65,6 +65,7 @@ function display (objList) {
         temp = temp + '<button type="button" onclick="delete_item(' + String(i+1) + ')">Delete</button>';
         codeItems += div_concatenate_perline( temp, "item"+String(i+1) );
     }
+    console.log (codeItems);    
     document.getElementById("item").innerHTML = codeItems;
 }
 
