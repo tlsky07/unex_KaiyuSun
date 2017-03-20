@@ -1,0 +1,35 @@
+{
+    "lineItems" :[
+        {
+            "name" : "mocha",
+			"itemID" :"item1",
+            "price" : 5,
+            "qty" : 1
+        },
+        {
+            "name" : "latte", 
+			"itemID" : "item2",
+            "price" : 8,
+            "qty" : 2
+        },
+        {
+            "name" : "cookies",
+			"itemID" : "item3",
+            "price" : 4,
+            "qty" : 3
+        },
+        {
+            "name" : "hamburger",
+			"itemID" : "item4",
+            "price" : 10,
+            "qty" : 1
+        }
+    ],
+    "customer" : {
+        "name"            : "Kaiyu Sun",
+        "address"         : "1234 Berkeley Way, Berkeley",
+        "cardNumber"      : 1234567890,
+        "expirationDate"  : "2019-03-10"
+
+    }    
+}

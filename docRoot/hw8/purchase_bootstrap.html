@@ -1,0 +1,235 @@
+<script>
+'use strict';
+
+function get(url) {
+    return new Promise( function(resolve, reject) {
+        var req = new XMLHttpRequest();
+        req.onload = function() {
+            resolve(req.response);
+        }
+        req.onerror = function() {
+            reject( Error("What went wrong") );  // this is just a substitute of what will really be returned
+        }
+        req.open ("POST", url);
+        req.send();
+    })
+}
+
+var myOrder;
+
+function getmyorder() {
+    get("order.json").then(
+        function(response) {
+            var orderInfo = JSON.parse(response);
+            myOrder = new Order(orderInfo.customer, orderInfo.lineItems);
+            myOrder.display();
+            myOrder.cal_subtotal();
+        },
+        function(error) { console.log("Failed" + error.message); }
+    )
+    .catch(
+        function(reason) {
+            console.log('Handle rejected promise ('+reason+') here.');
+        });
+}
+
+function Order( customerval,lineItemval ) {
+    this.customer = new Customer(customerval.name, customerval.address, customerval.cardNumber, customerval.expirationDate);
+    this.lineItems = [];
+        for (var i=0; i<lineItemval.length; i++) {
+            this.lineItems.push(new lineItem(lineItemval[i].name, lineItemval[i].itemID, lineItemval[i].price, lineItemval[i].qty));
+        }
+    this.cal_subtotal = function() {
+        var totalNotax = 0;
+        var tax = 0;
+        var shipping = 5;
+        var lineItemTemp;
+        for (i=0; i<this.lineItems.length; i++) {
+            if (this.lineItems[i].isDeleted) { continue; }
+            else { 
+                lineItemTemp = document.getElementById(this.lineItems[i].name + "_qty"); 
+                totalNotax += this.lineItems[i].price * lineItemTemp.options[lineItemTemp.selectedIndex].value; }
+        }
+        tax = totalNotax * 0.1;
+        if (totalNotax == 0) {
+            shipping = 0;
+        }
+        document.getElementById("tax").innerHTML = tax;
+        document.getElementById("shipping").innerHTML = shipping;
+        document.getElementById("subTotal").innerHTML = totalNotax + tax + shipping;
+    }
+    this.display = function() {
+        var htmlcode = "";
+        htmlcode += div_concatenate( "<b>Name</b>" );
+        htmlcode += div_concatenate( "<b>Price($)</b>" );
+        htmlcode += div_concatenate( "<b>Quantity</b>" );
+        htmlcode = div_concatenate_perline(htmlcode, "caption");
+        for (i=0; i<this.lineItems.length; i++) {
+            if (this.lineItems[i].isDeleted) { continue; }
+            else { htmlcode += this.lineItems[i].html_code(); }
+        };
+        console.log ("htmlcode = " + htmlcode);        
+        document.getElementById("item").innerHTML = htmlcode;
+    }
+}
+
+function Customer( nameval, addressval, cardNumberval, expirationDateval ) {
+    this.name = nameval;
+    this.address = addressval;
+    this.cardNumber = cardNumberval;
+    this.expirationDate = expirationDateval;
+}
+
+function lineItem( nameval, itemIDval, priceval, qtyval ) {
+    this.name = nameval;
+    this.itemID = itemIDval;
+    this.price = priceval;
+    this.qty = qtyval;
+    this.html_code = function() {
+        var temp = "";
+        temp += div_concatenate( this.name );
+        temp += div_concatenate( this.price );
+        temp += '<div class="col-xs-3 col-md-2">\
+                <div class="form-group">\
+                <label for="qty"></label>\
+                <select class="form-control" id="' + this.name + '_qty' + '" onchange="myOrder.cal_subtotal()">';
+        for (var i=1; i<=10; i++) { temp += '<option>' + i + '</option>'; };
+        temp += '</select></div></div>';
+        temp = temp + '<button type="button" class="btn btn-warning" onclick="delete_item(' + this.itemID + ')">Delete</button>';
+        temp = div_concatenate_perline( temp, this.itemID );
+        return temp;
+    }
+    this.isDeleted = false;  // default value
+    this.delete_this_item = function() { this.isDeleted = true; }
+}
+
+function delete_item(itemDivID) {
+    for (var i=0; i<myOrder.lineItems.length; i++) {
+        if (myOrder.lineItems[i].itemID == itemDivID.id) {
+            myOrder.lineItems[i].delete_this_item(); 
+        } else { continue; }
+    }
+    myOrder.cal_subtotal();
+    myOrder.display();   
+}
+
+// generate div for each item component
+function div_concatenate ( str ) {
+    str = '<div class="col-xs-3">' + str + '</div>';
+    return str;
+}
+
+// generate div for each item
+function div_concatenate_perline ( str, idName ) {
+    str = '<div id="' + idName + '" class="row">' + str + '</div>';
+    return str
+}
+
+function reset_lineItem () {
+    myOrder = getmyorder();
+}
+
+window.onload = function() { getmyorder(); }
+
+</script>
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- you can download boostrap as well: http://getbootstrap.com/getting-started/ -->
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+		  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+		  crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+		integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+		crossorigin="anonymous">
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins). Can go at end of body if you
+	     don't use jquery in the head element 
+	-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <title> Shopping cart Page </title>
+    <link rel="stylesheet" type="text/css" href="purchase_bootstrap.css">
+    <script type="text/javascript" src="date.js"></script>
+	<style>
+	body {
+	  padding-top: 70px;
+	}
+	</style>
+</head>
+<body>
+    <nav id="menu" class="navbar navbar-toggleable-sm navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#"><span><img alt="Brand" src="/Material/Icon.jpg" width="25px"> Homework 8</span></a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="purchase_bootstrap.html">Shopping</a></li>
+            <li><a href="CV-SKY.html">About me</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>    
+    <!--<div id="navbarPlaceholder"></div>-->
+    <div id="cart" class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-7">
+                <div class="row h2">Shopping Cart</div>            
+                <div class="row"><div id="item" class="item"></div></div>
+            </div>
+            <!--this is separating space between shopping cart and order Summary-->
+            <div class="col-xs-1 col-sm-1"></div>
+            <div class="col-xs-10 col-sm-3 text-center orderSummary">
+                <div class="row h4 text-left"><strong>Order Summary</strong></div>
+                <div class="row subtotal">
+                    <div class="row h5">Tax (10%): <span id="tax">temp value</span></div>
+                    <div class="row h5">Shipping: <span id="shipping">temp value</span></div>
+                    <div class="row h4"><strong>Subtotal: <span id="subTotal">temp value</span></strong></div>
+                    <div class="row h4"><button type="button" class="btn btn-primary" onclick="reset_lineItem()">Reset</button></div>
+                </div>
+                <br>
+                <div class="row h4 text-left"><strong>Customer Information</strong></div>
+                <div class="row customerInfo text-left">
+                    <form id="customerInfoForm" action="http://holub.com/echo.php" method="post">
+                        <div class="form-group">
+                            <label for="customername">1. Name</label>
+                            <input type="text" class="form-control" id="customername" name="customername">
+                        </div>
+                        <div class="form-group">
+                            <label for="address">2. Shipping Address</label>
+                            <input type="text" class="form-control" id="address" name="Shipping address">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardnum">3. CardNumber</label>
+                            <input type="text" class="form-control" id="cardnum" name="Card number">
+                        </div>
+                        <div class="form-group">
+                            <label for="epdate">4. Expiration Date</label>
+                            <input type="date" class="form-control" id="epdate" name="Expiration date">
+                        </div>
+                        <div class="text-center"><button type="submit" class="btn btn-warning">Proceed to checkout</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body> 
+</html>

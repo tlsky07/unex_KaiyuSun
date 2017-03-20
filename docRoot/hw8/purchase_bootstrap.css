@@ -1,0 +1,20 @@
+.item {
+    border: 2px solid grey;
+    border-left: 0;
+    border-right: 0;
+    font-size: 16px;
+}
+.subtotal, .customerInfo {
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: lightyellow;
+    padding-top:10px;
+}
+.orderSummary {
+    padding-top: 20px;
+}
+
+.customerInfo {
+    padding-left: 15px;
+    padding-right: 15px;
+}

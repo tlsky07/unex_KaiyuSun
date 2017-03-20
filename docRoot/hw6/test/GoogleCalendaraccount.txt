@@ -1,0 +1,2 @@
+clientID: 693502716481-7fsjpqvekini0rcsarbng2h66a7lpp40.apps.googleusercontent.com
+client secret: hBQCpzVoTOUQBaX_3nUZN_iU
